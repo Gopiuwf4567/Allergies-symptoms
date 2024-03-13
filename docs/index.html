@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Allergy and Symptom Lookup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        form {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .results {
+            max-width: 500px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .allergy {
+            font-weight: bold;
+        }
+        ol {
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Allergy and Symptom Lookup</h1>
+    <form method="post">
+        <input type="text" name="input_value" placeholder="Enter allergy or symptom" required>
+        <select name="search_type">
+            <option value="allergy">Allergy</option>
+            <option value="symptom">Symptom</option>
+        </select>
+        <button type="submit">Search</button>
+    </form>
+    {% if results is not none %}
+    <div class="results">
+        <h2>Results:</h2>
+        {% for index, row in results.iterrows() %}
+            <div>
+                <span class="allergy">Allergy:</span> - {{ row['DESCRIPTION'] }}
+                <br>
+                <span class="allergy">Symptoms:</span>
+                <ol>
+                    <li>{{ row['Symptom 1'] }}</li>
+                    <li>{{ row['Symptom 2'] }}</li>
+                    <li>{{ row['Symptom 3'] }}</li>
+                    <li>{{ row['Symptom 4'] }}</li>
+                    <li>{{ row['Symptom 5'] }}</li>
+                </ol>
+            </div>
+            <br>
+        {% endfor %}
+    </div>
+    {% endif %}
+</body>
+</html>
